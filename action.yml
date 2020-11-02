@@ -1,0 +1,27 @@
+name: 'WireGuard SSH'
+description: 'SSH over WireGuard'
+inputs:
+  peer_port:
+    description: 'Port of WireGuard peer'
+    required: false
+  peer_ip:
+    description: 'IP of WireGuard peer'
+    required: true
+  github_ip:
+    description: 'Private IP of GitHub peer'
+    required: false
+  ssh_public_key:
+    description: 'SSH public key'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/wireguard-ssh.sh
+      shell: bash
+      env:
+        PEER_PORT: ${{ inputs.peer_port }}
+        PEER_IP: ${{ inputs.peer_ip }}
+        GITHUB_IP: ${{ inputs.github_ip }}
+        SSH_PUBLIC_KEY: ${{ inputs.ssh_public_key }}
+
+
