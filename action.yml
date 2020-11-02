@@ -1,20 +1,27 @@
 name: 'WireGuard SSH'
 description: 'SSH over WireGuard'
-icon: lock
-color: red
+branding:
+  icon: 'lock'
+  color: 'red'
 inputs:
-  peer_port:
-    description: 'Port of WireGuard peer'
-    required: false
   peer_ip:
     description: 'IP of WireGuard peer'
     required: true
-  github_ip:
-    description: 'Private IP of GitHub peer'
-    required: false
   ssh_public_key:
     description: 'SSH public key'
     required: true
+  peer_port:
+    description: 'Port of WireGuard peer'
+    required: false
+  github_ip:
+    description: 'Private IP of GitHub peer'
+    required: false
+  ssh_connection_timeout:
+    description: 'Seconds to wait for SSH connection'
+    required: false
+  session_timeout:
+    description: 'Seconds to timeout SSH session'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -25,5 +32,6 @@ runs:
         PEER_IP: ${{ inputs.peer_ip }}
         GITHUB_IP: ${{ inputs.github_ip }}
         SSH_PUBLIC_KEY: ${{ inputs.ssh_public_key }}
-
+        SSH_CONNECTION_TIMEOUT: ${{ inputs.ssh_connection_timeout }}
+        SESSION_TIMEOUT: ${{ inputs.session_timeout }}
 
