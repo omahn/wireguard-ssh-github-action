@@ -1,5 +1,6 @@
 name: 'WireGuard SSH'
 description: 'SSH over WireGuard'
+icon: lock
 inputs:
   peer_port:
     description: 'Port of WireGuard peer'
