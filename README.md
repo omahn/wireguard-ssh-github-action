@@ -8,13 +8,13 @@ This action creates a WireGuard tunnel between a GitHub Actions runner and a pee
 ```yaml
 - uses: omahn/wireguard-ssh-github-action@v1.1
   with:
-    # Required. IP address of your WireGuard peer.
+    # Required. IP address of your WireGuard peer/endpoint. Must be publicly reachable.
     peer_ip: ''
     # Required. SSH public key as a string.
     ssh_public_key: ''
     # Port of WireGuard peer.
     peer_port: '51820'
-    # Private IP of GitHub peer.
+    # Private IP of GitHub WireGuard peer.
     github_ip: '192.168.192.1'
     # Seconds to wait for SSH connection.
     ssh_connection_timeout: '300'
