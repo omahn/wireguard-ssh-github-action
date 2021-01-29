@@ -77,6 +77,7 @@ echo "=== Ready - waiting up to ${SSH_CONNECTION_TIMEOUT} seconds for SSH connec
 
 while [ "${SSH_CONNECTION_TIMEOUT}" -gt 0 ] ; do
   if netstat -nt |grep -q -E "${GITHUB_IP}:22\\W+${PEER_PRIVATE_IP}:[0-9]+\\W+ESTABLISHED" ; then
+    echo ""
     echo "=== SSH connection detected - sleeping for ${SESSION_TIMEOUT} seconds or until SSH session ends ==="
     while [ "${SESSION_TIMEOUT}" -gt 0 ] ; do
         if netstat -nt |grep -q -E "${GITHUB_IP}:22\\W+${PEER_PRIVATE_IP}:[0-9]+\\W+ESTABLISHED" ; then
@@ -94,10 +95,12 @@ while [ "${SSH_CONNECTION_TIMEOUT}" -gt 0 ] ; do
     exit 1
   else
     SSH_CONNECTION_TIMEOUT=$((SSH_CONNECTION_TIMEOUT - 1))
+    echo -n "."
     sleep 1
   fi
 done
 
 # No connection seen
+echo ""
 echo "=== No SSH connection - aborting ==="
 exit 1
