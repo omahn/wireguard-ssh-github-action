@@ -95,7 +95,9 @@ while [ "${SSH_CONNECTION_TIMEOUT}" -gt 0 ] ; do
   else
     SSH_CONNECTION_TIMEOUT=$((SSH_CONNECTION_TIMEOUT - 1))
     # Produce output to encourage GitHub Actions to show progress during the run
-    echo "."
+    if (( SSH_CONNECTION_TIMEOUT % 10 == 0 )); then
+        echo "."
+    fi
     sleep 1
   fi
 done
